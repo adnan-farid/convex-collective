@@ -1,3 +1,7 @@
 env
 .venv
 Untitled.ipynb
+__pycache__/
+./rhomboidtiling_convex_collective/python/__pycache__/
+*.pyc
+.idea.
