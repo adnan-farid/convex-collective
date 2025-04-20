@@ -1,0 +1,9 @@
+# Ensure text files use Linux-style line endings (LF) in the repository
+* text=auto eol=lf
+
+# Mark common binary files so Git doesn't change their line endings
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.pdf binary

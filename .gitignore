@@ -5,3 +5,4 @@ __pycache__/
 ./rhomboidtiling_convex_collective/python/__pycache__/
 *.pyc
 .idea.
+./website/.venv
