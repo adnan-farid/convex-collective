@@ -8,8 +8,6 @@ This section details how to set up and run the Flask web application located in 
 
 ### Setup Instructions
 
-Follow these steps precisely to ensure a consistent environment across different operating systems.
-
 1.  **Navigate to the Website Directory and Create a Python Virtual Environment:**
     ```bash
     cd website
@@ -41,8 +39,6 @@ Follow these steps precisely to ensure a consistent environment across different
     ```
     Note: May add more requirements once logic for triangulations is implemented.
 
-Ensure you are still in the `website/` directory and your virtual environment `(.venv)` is activated.
-
 4.  **Set Flask Environment Variables:**
     These variables tell Flask how to run the application (pointing to `app.py` and enabling development mode for debugging and auto-reloading).
 
@@ -63,10 +59,9 @@ Ensure you are still in the `website/` directory and your virtual environment `(
         $env:FLASK_APP = "app.py"
         $env:FLASK_ENV = "development"
         ```
-    * **Note:** `FLASK_ENV=development` automatically enables debug mode. Never use development mode or debug mode in a production deployment!
 
 5.  **Run the Flask Development Server:**
     ```bash
     flask run
     ```
-    Go to `http://127.0.0.1:5000`
+    Go to `http://127.0.0.1:5000` to see the website
