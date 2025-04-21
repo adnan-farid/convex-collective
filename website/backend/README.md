@@ -10,11 +10,16 @@ This section details how to set up and run the Flask web application located in 
 
 1.  **Navigate to the Website Directory and Create a Python Virtual Environment:**
     ```bash
-    cd website
+    cd website/backend
     python -m venv .venv
     ```
 
 2.  **Activate the Virtual Environment:**
+    
+    * **Windows (Git Bash):**
+        ```bash
+        source .venv/Scripts/activate
+        ```
 
     * **macOS / Linux (bash, zsh):**
         ```bash
@@ -58,6 +63,11 @@ This section details how to set up and run the Flask web application located in 
         ```powershell
         $env:FLASK_APP = "app.py"
         $env:FLASK_ENV = "development"
+        ```
+    
+    * **Windows Alternative (Git Bash):**
+        ```bash
+        python -m flask run
         ```
 
 5.  **Run the Flask Development Server:**
