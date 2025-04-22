@@ -85,7 +85,6 @@ export default function FrameRefinement() {
       {}
       {}
       <div className="point-input-section" style={{ marginBottom: '1rem', padding: '10px', borderRadius: '4px' }}>
-         <h4 style={{ marginTop: 0, marginBottom: '10px' }}>Click to Add Points:</h4>
          <PointInputSVG onPointsUpdate={handlePointsUpdate} />
          {}
          <p style={{marginTop: '8px', fontSize: '0.9rem', color: '#555'}}>

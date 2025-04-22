@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
+import '../Animation.css';
+import PointInputSVG from './PointInputSVG';
 
 export default function ConvexHullDemo() {
   const [frames, setFrames] = useState([]);
@@ -7,20 +9,31 @@ export default function ConvexHullDemo() {
   const [speed, setSpeed] = useState(1000); 
   const timerRef = useRef(null);
 
-  const pts = [
-    [ 1.0,  0.0], [ 0.5,  0.866], [-0.5,  0.866],
-    [-1.0,  0.0], [-0.5, -0.866], [ 0.5, -0.866],
-    [ 0.0,  0.0], [ 0.8,  0.2], [ 0.2,  0.5],
-    [-0.3,  0.4], [-0.4, -0.2], [ 1.2,  0.3],
-    [-1.1,  0.2], [-0.8, -1.0], [ 0.6, -1.2]
-  ];
+  // const pts = [
+  //   [ 1.0,  0.0], [ 0.5,  0.866], [-0.5,  0.866],
+  //   [-1.0,  0.0], [-0.5, -0.866], [ 0.5, -0.866],
+  //   [ 0.0,  0.0], [ 0.8,  0.2], [ 0.2,  0.5],
+  //   [-0.3,  0.4], [-0.4, -0.2], [ 1.2,  0.3],
+  //   [-1.1,  0.2], [-0.8, -1.0], [ 0.6, -1.2]
+  // ];
+
+    const [userDefinedPoints, setUserDefinedPoints] = useState([]);
+    const handlePointsUpdate = useCallback((updatedPoints) => {
+      setUserDefinedPoints(updatedPoints);
+    }, []);
 
   const loadFrames = async () => {
+    if (userDefinedPoints.length === 0) {
+      alert("Please add some points by clicking in the input area first.");
+      return;
+  }
     try {
+      // Convert the points from [{x: x, y: y}, ...] to [[x, y], ...] format before sending to the backend.
+      const pointsAsArrays = userDefinedPoints.map(point => [point.x, -point.y]); // -point.y is needed due to different coordinate systems
       const res = await fetch('http://localhost:5000/api/animate_hull', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ points: pts }),
+        body: JSON.stringify({ points: pointsAsArrays}),
       });
       const json = await res.json();
       if (!res.ok) throw new Error(json.error || res.statusText);
@@ -59,6 +72,13 @@ export default function ConvexHullDemo() {
   return (
     <div className="convex-hull-demo">
       <h3>3D Convex Hull &amp; Lower‐Face Projection</h3>
+        <div className="point-input-section" style={{ marginBottom: '1rem', padding: '10px', borderRadius: '4px' }}>
+               <PointInputSVG onPointsUpdate={handlePointsUpdate} />
+               {}
+               <p style={{marginTop: '8px', fontSize: '0.9rem', color: '#555'}}>
+                  Points added: {userDefinedPoints.length}
+               </p>
+            </div>
 
       <div className="controls">
         <button onClick={loadFrames}>
@@ -80,9 +100,11 @@ export default function ConvexHullDemo() {
               min={100}
               max={2000}
               step={100}
-              value={2000 - speed} // invert here
-              onChange={e => setSpeed(2000 - Number(e.target.value))} // and here
+              value={speed}
+              onChange={e => setSpeed(Number(e.target.value))} // and here
+              style={{ verticalAlign: 'middle', marginLeft: '5px'}}
             />
+            ({(speed / 1000).toFixed(1)}s)
           </label>
         </div>
       )}

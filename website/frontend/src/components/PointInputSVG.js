@@ -62,13 +62,11 @@ export default function PointInputSVG({
           className="w-full h-64 bg-gray-950 rounded-lg cursor-crosshair"
           preserveAspectRatio="xMidYMid meet"
         >
-          {/* Grid lines for reference */}
           <line x1="0" y1="50" x2="150" y2="50" stroke="#4a5568" strokeWidth="0.2" />
           <line x1="75" y1="0" x2="75" y2="100" stroke="#4a5568" strokeWidth="0.2" />
 
-          {/* Grid markers */}
-          <text x="150" y="50" fill="#718096" fontSize="3" textAnchor="end">x-axis</text>
-          <text x="75" y="5" fill="#718096" fontSize="3" textAnchor="middle">y-axis</text>
+{/*           <text x="150" y="50" fill="#718096" fontSize="3" textAnchor="end">x-axis</text>
+          <text x="75" y="5" fill="#718096" fontSize="3" textAnchor="middle">y-axis</text> */}
 
           {/* User placed points */}
           {points.map((point, index) => (
