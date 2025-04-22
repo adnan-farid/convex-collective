@@ -5,7 +5,7 @@ import Footer from './components/Footer';
 import GaussianDemo from './components/GaussianDemo';
 import ExplosionDemo from './components/ExplosionDemo';
 import ConvexHullDemo from './components/ConvexHullDemo'
-
+import Incremental3DHull from './components/Incremental3DHull'
 
 function App() {
   return (
@@ -160,9 +160,32 @@ function App() {
 
 
         <div className="animation-container">
-          <h2>Interactive Animation</h2>
+          <h2>Animation</h2>
           <Animation />
         </div>
+
+        <div className="animation-container">
+          <h2>Incremental Algorithm</h2>
+          <div className="algorithm-info">
+            <p>
+              We compute the order‑2 Delaunay triangulation by lifting every pair of points
+              into 3D, computing their barycenters on the paraboloid, and then projecting
+              the downward‑facing (lower) hull back to 2D.
+            </p>
+            <p>
+              The current implementation uses Qhull to rebuild the entire hull on each
+              insertion, but to make this truly incremental we need to:
+            </p>
+            <ol>
+              <li>Construct the initial tetrahedron using the first four points.</li>
+              <li>When a new point arrives, find and remove all hull faces visible from it.</li>
+              <li>Fix the hole in the convex hull by connecting each edge to the inserted point.</li>
+              <li>From those new faces, keep only the ones whose normals face downward (which are on the lower hull).</li>
+            </ol>
+          </div>
+          <Incremental3DHull />
+        </div>
+
       </main>
 
       <Footer />

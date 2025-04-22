@@ -6,6 +6,7 @@ from rhomboidtiling_convex_collective.refinementlib.refinement import (
     refine_with_k_steiner_points,
     get_refinement_frames
 )
+from rhomboidtiling_convex_collective.refinementlib.lower_hull_anim import generate_convex_hull_animation
 from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
@@ -14,6 +15,19 @@ CORS(app)
 def index():
     return render_template('index.html', 
                            message="Investigating Angle Optimality in Higher-Order Voronoi Diagrams and Refinement Techniques")
+
+@app.route('/api/animate_hull', methods=['POST'])
+def hull_frames():
+    data = request.get_json(force=True)
+    points = data.get('points')
+    if not isinstance(points, list) or len(points) < 1:
+        return jsonify(error="'points' must be a non-empty list of [x,y,z]"), 400
+
+    try:
+        frames = generate_convex_hull_animation(points)
+        return jsonify(frames=frames)
+    except Exception as e:
+        app.logger.exception("hull_frames error")
 
 @app.route('/api/animate', methods=['POST'])
 def frames():
@@ -29,5 +43,3 @@ def frames():
     png_frames = get_refinement_frames(meshes, points, min_angle)
     return jsonify(frames=png_frames)
 
-if __name__ == '__main__':
-    app.run(debug=True, port=5001)
