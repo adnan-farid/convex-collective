@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
 
-// Gaussian Distribution Demo component with reduced size
+// Gaussian Distribution Demo component
 export default function GaussianDemo() {
   const [numPoints, setNumPoints] = useState(100);
   const [stdDev, setStdDev] = useState(1);
   const [meanX, setMeanX] = useState(0);
   const [meanY, setMeanY] = useState(0);
   const [points, setPoints] = useState([]);
-  const [seed, setSeed] = useState(42);
 
   // Generate Gaussian distributed points
   useEffect(() => {
@@ -64,19 +63,20 @@ export default function GaussianDemo() {
   const viewBoxHeight = maxY - minY;
 
   return (
-    <div className="bg-gray-800 rounded-lg p-4 my-3" style={{ maxWidth: "600px", margin: "0 auto" }}>
+    <div className="gaussian-demo bg-gray-800 rounded-lg p-6 my-6 shadow-lg max-w-3xl mx-auto">
+      <h3 className="text-xl font-bold mb-4 text-cyan-400 border-b border-gray-700 pb-2">Gaussian Distribution Sampling</h3>
 
-      <div className="flex flex-col md:flex-row gap-4">
+      <div className="flex flex-col md:flex-row gap-6">
         <div className="flex-1">
-          <div className="bg-gray-900 rounded-lg p-3 mb-3">
+          <div className="bg-gray-900 rounded-lg p-4 mb-4 shadow-inner">
             <svg
               viewBox={`${minX} ${minY} ${viewBoxWidth} ${viewBoxHeight}`}
-              className="w-full h-48 bg-gray-950 rounded-lg"
+              className="w-full h-64 bg-gray-950 rounded-lg"
               preserveAspectRatio="xMidYMid meet"
             >
               {/* Grid lines */}
               <line x1={minX} y1="0" x2={maxX} y2="0" stroke="#555" strokeWidth="0.1" />
-              <line x1="0" y1={minY} y2={maxY} x2="0" stroke="#555" strokeWidth="0.1" />
+              <line x1="0" y1={minY} x2="0" y2={maxY} stroke="#555" strokeWidth="0.1" />
 
               {/* Points */}
               {points.map((point, i) => (
@@ -92,12 +92,12 @@ export default function GaussianDemo() {
             </svg>
           </div>
 
-          <div className="text-center text-xs text-gray-400 mb-2">
+          <div className="text-center text-sm text-cyan-300 mb-3">
             {numPoints} points sampled from a Gaussian distribution
           </div>
 
           <button
-            className="w-full bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-1 px-3 rounded text-sm"
+            className="w-full bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded transition-colors duration-200 shadow"
             onClick={generatePoints}
           >
             Generate New Points
@@ -105,23 +105,29 @@ export default function GaussianDemo() {
         </div>
 
         <div className="flex-1">
-          <div className="bg-gray-900 rounded-lg p-3">
-            <h4 className="font-bold mb-2 text-white text-sm">Parameters</h4>
+          <div className="bg-gray-900 rounded-lg p-4 shadow-inner">
+            <h4 className="font-bold mb-3 text-white text-base border-b border-gray-800 pb-2">Parameters</h4>
 
-            <div className="mb-2">
-              <label className="block text-gray-400 mb-1 text-xs">Number of Points: {numPoints}</label>
+            <div className="mb-4">
+              <div className="flex justify-between mb-1">
+                <label className="text-gray-300 text-sm">Number of Points</label>
+                <span className="text-cyan-400 font-medium">{numPoints}</span>
+              </div>
               <input
                 type="range"
                 min="10"
                 max="500"
                 value={numPoints}
                 onChange={(e) => setNumPoints(Number(e.target.value))}
-                className="w-full"
+                className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer"
               />
             </div>
 
-            <div className="mb-2">
-              <label className="block text-gray-400 mb-1 text-xs">Standard Deviation: {stdDev.toFixed(1)}</label>
+            <div className="mb-4">
+              <div className="flex justify-between mb-1">
+                <label className="text-gray-300 text-sm">Standard Deviation</label>
+                <span className="text-cyan-400 font-medium">{stdDev.toFixed(1)}</span>
+              </div>
               <input
                 type="range"
                 min="0.1"
@@ -129,12 +135,15 @@ export default function GaussianDemo() {
                 step="0.1"
                 value={stdDev}
                 onChange={(e) => setStdDev(Number(e.target.value))}
-                className="w-full"
+                className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer"
               />
             </div>
 
-            <div className="mb-2">
-              <label className="block text-gray-400 mb-1 text-xs">Mean X: {meanX.toFixed(1)}</label>
+            <div className="mb-4">
+              <div className="flex justify-between mb-1">
+                <label className="text-gray-300 text-sm">Mean X</label>
+                <span className="text-cyan-400 font-medium">{meanX.toFixed(1)}</span>
+              </div>
               <input
                 type="range"
                 min="-5"
@@ -142,12 +151,15 @@ export default function GaussianDemo() {
                 step="0.1"
                 value={meanX}
                 onChange={(e) => setMeanX(Number(e.target.value))}
-                className="w-full"
+                className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer"
               />
             </div>
 
-            <div className="mb-2">
-              <label className="block text-gray-400 mb-1 text-xs">Mean Y: {meanY.toFixed(1)}</label>
+            <div className="mb-4">
+              <div className="flex justify-between mb-1">
+                <label className="text-gray-300 text-sm">Mean Y</label>
+                <span className="text-cyan-400 font-medium">{meanY.toFixed(1)}</span>
+              </div>
               <input
                 type="range"
                 min="-5"
@@ -155,7 +167,7 @@ export default function GaussianDemo() {
                 step="0.1"
                 value={meanY}
                 onChange={(e) => setMeanY(Number(e.target.value))}
-                className="w-full"
+                className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer"
               />
             </div>
           </div>

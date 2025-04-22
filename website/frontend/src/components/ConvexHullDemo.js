@@ -84,15 +84,15 @@ export default function ConvexHullDemo() {
   const viewBoxHeight = maxY - minY;
 
   return (
-    <div className="bg-gray-800 rounded-lg p-4 my-3" style={{ maxWidth: '600px', margin: '0 auto' }}>
-      <h3 className="text-lg font-bold mb-3 text-green-400">Convex Hull Sampling</h3>
+    <div className="convex-hull-demo bg-gray-800 rounded-lg p-6 my-6 shadow-lg max-w-3xl mx-auto">
+      <h3 className="text-xl font-bold mb-4 text-green-400 border-b border-gray-700 pb-2">Convex Hull Sampling</h3>
 
-      <div className="flex flex-col md:flex-row gap-4">
+      <div className="flex flex-col md:flex-row gap-6">
         <div className="flex-1">
-          <div className="bg-gray-900 rounded-lg p-3 mb-3">
+          <div className="bg-gray-900 rounded-lg p-4 mb-4 shadow-inner">
             <svg
               viewBox={`${minX} ${minY} ${viewBoxWidth} ${viewBoxHeight}`}
-              className="w-full h-48 bg-gray-950 rounded-lg"
+              className="w-full h-64 bg-gray-950 rounded-lg"
               preserveAspectRatio="xMidYMid meet"
             >
               {/* Grid lines */}
@@ -123,12 +123,12 @@ export default function ConvexHullDemo() {
             </svg>
           </div>
 
-          <div className="text-center text-xs text-gray-400 mb-2">
+          <div className="text-center text-sm text-green-300 mb-3">
             {numPoints} random points — radius {radius.toFixed(1)}
           </div>
 
           <button
-            className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-1 px-3 rounded text-sm"
+            className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition-colors duration-200 shadow"
             onClick={generatePoints}
           >
             Generate New Points
@@ -136,23 +136,29 @@ export default function ConvexHullDemo() {
         </div>
 
         <div className="flex-1">
-          <div className="bg-gray-900 rounded-lg p-3">
-            <h4 className="font-bold mb-2 text-white text-sm">Parameters</h4>
+          <div className="bg-gray-900 rounded-lg p-4 shadow-inner">
+            <h4 className="font-bold mb-3 text-white text-base border-b border-gray-800 pb-2">Parameters</h4>
 
-            <div className="mb-2">
-              <label className="block text-gray-400 mb-1 text-xs">Number of Points: {numPoints}</label>
+            <div className="mb-4">
+              <div className="flex justify-between mb-1">
+                <label className="text-gray-300 text-sm">Number of Points</label>
+                <span className="text-green-400 font-medium">{numPoints}</span>
+              </div>
               <input
                 type="range"
                 min="5"
                 max="200"
                 value={numPoints}
                 onChange={(e) => setNumPoints(Number(e.target.value))}
-                className="w-full"
+                className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer"
               />
             </div>
 
-            <div className="mb-2">
-              <label className="block text-gray-400 mb-1 text-xs">Radius: {radius.toFixed(1)}</label>
+            <div className="mb-4">
+              <div className="flex justify-between mb-1">
+                <label className="text-gray-300 text-sm">Radius</label>
+                <span className="text-green-400 font-medium">{radius.toFixed(1)}</span>
+              </div>
               <input
                 type="range"
                 min="1"
@@ -160,13 +166,13 @@ export default function ConvexHullDemo() {
                 step="0.5"
                 value={radius}
                 onChange={(e) => setRadius(Number(e.target.value))}
-                className="w-full"
+                className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer"
               />
             </div>
 
-            <div className="bg-gray-800 p-2 rounded mt-3 text-xs text-gray-300">
-              <p>Convex hull connects outermost points</p>
-              <p>Changing radius changes point spread</p>
+            <div className="bg-gray-800 p-3 rounded mt-4 text-sm text-gray-300 border border-gray-700">
+              <p className="mb-2">Convex hull connects the outermost points in the set.</p>
+              <p>Adjusting the radius changes how spread out the points are.</p>
             </div>
           </div>
         </div>

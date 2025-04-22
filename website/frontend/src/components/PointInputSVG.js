@@ -45,49 +45,55 @@ export default function PointInputSVG({
   };
 
   return (
-    <div className="point-input-container">
-      <svg
-        ref={svgRef}
-        width={width}
-        height={height}
-        viewBox={viewBox}
-        onClick={handleClick}
-        style={{
-          border: '1px solid #555',
-          backgroundColor: '#2d3748',
-          cursor: 'crosshair',
-          display: 'block',
-          maxWidth: '100%'
-        }}
-        preserveAspectRatio="xMidYMid meet"
-      >
-        {}
-        {/* add grid axis if desired */}
-        {/* <line x1="0" y1="50" x2="100" y2="50" stroke="#4a5568" strokeWidth="0.2" />
-        <line x1="50" y1="0" x2="50" y2="100" stroke="#4a5568" strokeWidth="0.2" /> */}
+    <div className="bg-gray-800 rounded-lg p-6 shadow-lg max-w-3xl mx-auto my-6">
+      <h3 className="text-xl font-bold mb-4 text-white border-b border-gray-700 pb-2">Interactive Point Input</h3>
 
-        {}
-        {points.map((point, index) => (
-          <circle
-            key={index}
-            cx={point.x}
-            cy={point.y}
-            r={POINT_RADIUS}
-            fill={POINT_COLOR}
-            style={{ pointerEvents: 'none' }}
-          />
-        ))}
-      </svg>
-      <button
-        onClick={handleClearPoints}
-        style={{
-          marginTop: '8px',
-          padding: '4px 8px',
-          fontSize: '0.8rem',
-        }}
-      >
-        Clear Points
-      </button>
+      <div className="text-gray-300 text-sm mb-4">
+        Click anywhere on the canvas below to add points. The points can be used for custom distribution visualization.
+      </div>
+
+      <div className="bg-gray-900 rounded-lg p-4 mb-4 shadow-inner">
+        <svg
+          ref={svgRef}
+          width={width}
+          height={height}
+          viewBox={viewBox}
+          onClick={handleClick}
+          className="w-full h-64 bg-gray-950 rounded-lg cursor-crosshair"
+          preserveAspectRatio="xMidYMid meet"
+        >
+          {/* Grid lines for reference */}
+          <line x1="0" y1="50" x2="150" y2="50" stroke="#4a5568" strokeWidth="0.2" />
+          <line x1="75" y1="0" x2="75" y2="100" stroke="#4a5568" strokeWidth="0.2" />
+
+          {/* Grid markers */}
+          <text x="150" y="50" fill="#718096" fontSize="3" textAnchor="end">x-axis</text>
+          <text x="75" y="5" fill="#718096" fontSize="3" textAnchor="middle">y-axis</text>
+
+          {/* User placed points */}
+          {points.map((point, index) => (
+            <circle
+              key={index}
+              cx={point.x}
+              cy={point.y}
+              r={POINT_RADIUS}
+              fill={POINT_COLOR}
+              style={{ pointerEvents: 'none' }}
+            />
+          ))}
+        </svg>
+      </div>
+
+      <div className="flex justify-between items-center">
+        <span className="text-sm text-gray-400">
+        </span>
+        <button
+          onClick={handleClearPoints}
+          className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition-colors duration-200 shadow text-sm"
+        >
+          Clear All Points
+        </button>
+      </div>
     </div>
   );
 }

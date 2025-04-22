@@ -38,6 +38,30 @@ function App() {
         explore the angle optimization properties of order-2 Delaunay Delaunay
         triangulations and the role of refinement in achieving these properties.
           </p>
+          <div className="animation-container">
+  <h2 className="text-2xl font-bold text-secondary-color mb-6">Order-k Delaunay Triangulations Visualizations using Rhomboid Tiling</h2>
+
+  <div className="grid md:grid-cols-2 gap-6">
+    <div className="bg-card-background rounded-lg p-4 shadow-md">
+      <img
+        src="/Delaunay1.png"
+        alt="Delaunay Triangulation Examples"
+        className="w-full rounded-lg"
+      />
+      <p className="text-gray-300 text-sm mt-2 text-center">Order-2 Delaunay triangulation with its correspodning angle histogram. Notice the really skinny triangle</p>
+    </div>
+
+    <div className="bg-card-background rounded-lg p-4 shadow-md">
+      <img
+        src="/Delaunay2.png"
+        alt="Triangle Angle Distribution"
+        className="w-full rounded-lg"
+      />
+      <p className="text-gray-300 text-sm mt-2 text-center">Histogram of triangle angles in a Delaunay mosaic</p>
+    </div>
+  </div>
+</div>
+
         </section>
 
         <section className="content-section">
@@ -58,9 +82,7 @@ function App() {
         <section className="content-section">
           <h2>3. Literature Review</h2>
           <p>
-            This paper provides an overview of a large number of refinement techniques for
-            first order Delaunay Triangulations. I believe some of these methods may be
-            useful for us and can generalize to higher order Delaunay Triangulations.
+            The following are a subset of papers we utilized for our study of refinement and Delaunay triangulations.
           </p>
           <ol className="literature-list">
             <li>
@@ -164,27 +186,48 @@ function App() {
           <Animation />
         </div>
 
-        <div className="animation-container">
-          <h2>Incremental Algorithm</h2>
-          <div className="algorithm-info">
-            <p>
-              We compute the order‑2 Delaunay triangulation by lifting every pair of points
-              into 3D, computing their barycenters on the paraboloid, and then projecting
-              the downward‑facing (lower) hull back to 2D.
-            </p>
-            <p>
-              The current implementation uses Qhull to rebuild the entire hull on each
-              insertion, but to make this truly incremental we need to:
-            </p>
-            <ol>
-              <li>Construct the initial tetrahedron using the first four points.</li>
-              <li>When a new point arrives, find and remove all hull faces visible from it.</li>
-              <li>Fix the hole in the convex hull by connecting each edge to the inserted point.</li>
-              <li>From those new faces, keep only the ones whose normals face downward (which are on the lower hull).</li>
-            </ol>
-          </div>
-          <Incremental3DHull />
-        </div>
+ <div className="animation-container">
+  <h2 className="text-3xl font-bold text-secondary-color mb-8 border-b border-secondary-color pb-2">
+    Incremental Algorithm
+  </h2>
+
+  <div className="bg-card-background p-8 rounded-xl shadow-lg text-gray-300 text-lg leading-relaxed space-y-6">
+
+    <p className="text-gray-200">
+      We compute the <span className="text-secondary-color font-semibold">order‑2 Delaunay triangulation</span> by lifting every pair of points
+      into 3D, computing their barycenters on the paraboloid, and then projecting
+      the downward‑facing (lower) hull back to 2D.
+    </p>
+
+    <div className="bg-gray-700 rounded-md p-4 border-l-4 border-secondary-color">
+      <p className="text-gray-100">
+        <strong>Note:</strong> The current implementation uses <span className="text-secondary-color font-semibold">Qhull</span> to rebuild the entire hull
+        on each insertion. To make it <em>truly incremental</em>, we need to:
+      </p>
+    </div>
+
+    <ol className="list-decimal list-inside space-y-4 pl-4 text-base">
+      <li className="font-semibold">
+        Construct the initial tetrahedron using the first four points.
+      </li>
+      <li className="font-semibold">
+        When a new point arrives, find and remove all hull faces visible from it.
+      </li>
+      <li className="font-semibold">
+        Fix the hole in the convex hull by connecting each edge to the inserted point.
+      </li>
+      <li className="font-semibold">
+        From those new faces, keep only the ones whose normals face downward (lower hull).
+      </li>
+    </ol>
+  </div>
+
+  <div className="mt-8">
+    <Incremental3DHull />
+  </div>
+</div>
+
+
 
       </main>
 
