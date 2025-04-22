@@ -72,6 +72,6 @@ This section details how to set up and run the Flask web application located in 
 
 5.  **Run the Flask Development Server:**
     ```bash
-    flask run
+    flaflasksk run
     ```
     Go to `http://127.0.0.1:5000` to see the website

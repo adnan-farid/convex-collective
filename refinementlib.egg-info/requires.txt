@@ -5,3 +5,4 @@ scipy
 flask
 flask-cors
 pillow
+IPython

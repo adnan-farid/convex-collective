@@ -8,4 +8,5 @@ Requires-Dist: scipy
 Requires-Dist: flask
 Requires-Dist: flask-cors
 Requires-Dist: pillow
+Requires-Dist: IPython
 Dynamic: requires-dist

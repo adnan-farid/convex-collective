@@ -143,88 +143,8 @@
     flex-direction: column;
     gap: 0.5rem;
   }
-  
+
   .frame-counter {
     margin: 0.5rem 0;
-  }
-}
-
-
-/* Additional styles to be added to App.css */
-
-/* Section headings styling */
-.content-section h3 {
-  color: var(--secondary-color);
-  margin-top: 1.5rem;
-  margin-bottom: 1rem;
-  font-size: 1.3rem;
-}
-
-.content-section h4 {
-  color: var(--text-color);
-  margin-top: 1.2rem;
-  margin-bottom: 0.8rem;
-  font-size: 1.1rem;
-  font-weight: bold;
-}
-
-/* Lists styling */
-.solutions-list li {
-  margin-bottom: 1.5rem;
-}
-
-.solutions-list p {
-  margin-bottom: 0.8rem;
-}
-
-.study-plan ul {
-  margin-bottom: 1.5rem;
-}
-
-.study-plan li {
-  margin-bottom: 1rem;
-}
-
-.study-plan li strong {
-  color: var(--secondary-color);
-}
-
-/* Code blocks and citations */
-.content-section code {
-  background-color: rgba(0,0,0,0.2);
-  padding: 0.2rem 0.4rem;
-  border-radius: 3px;
-  font-family: 'Courier New', monospace;
-}
-
-.citation {
-  font-style: italic;
-  color: #a0a0a0;
-  margin-left: 1.5rem;
-  display: block;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-  font-size: 0.9rem;
-}
-
-/* Add emphasis to important parts */
-.highlight {
-  background-color: rgba(91, 192, 190, 0.2);
-  padding: 0.2rem;
-  border-radius: 3px;
-}
-
-/* Improve mobile responsiveness */
-@media (max-width: 768px) {
-  .content-section h3 {
-    font-size: 1.2rem;
-  }
-
-  .content-section h4 {
-    font-size: 1rem;
-  }
-
-  .study-plan li {
-    margin-bottom: 0.8rem;
   }
 }
